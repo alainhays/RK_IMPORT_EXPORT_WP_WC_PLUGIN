@@ -22,7 +22,7 @@ class RK_ravi {
 	 * @var Singleton The reference the *Singleton* instance of this class
 	 */
 	private static $instance;
-
+	public $plugin_name =  'RK_IMPORT_EXPORT_WP_WC_PLUGIN';
 	/**
 	 * @var Reference to logging class.
 	 */
@@ -94,7 +94,7 @@ class RK_ravi {
 	public function scripts() {
 	
 	
-		wp_register_script('scripts', plugins_url('/woocommerce-ravikatre-plugin/scripts/bootstrap/dist/js/bootstrap.mim.js'), false, '1.0.0', false);
+		wp_register_script('scripts', plugins_url('/'.$this->plugin_name.'/scripts/bootstrap/dist/js/bootstrap.mim.js'), false, '1.0.0', false);
 		wp_enqueue_script('scripts');
 		
 		
@@ -103,12 +103,12 @@ class RK_ravi {
 	}
 	
 	public function scripts_init() {
-		wp_register_style('bootstrap', plugins_url('/woocommerce-ravikatre-plugin/scripts/bootstrap/dist/css/bootstrap.min.css'), false, '1.0.0', 'all');
+		wp_register_style('bootstrap', plugins_url('/'.$this->plugin_name.'scripts/bootstrap/dist/css/bootstrap.min.css'), false, '1.0.0', 'all');
 		wp_enqueue_style('bootstrap');
 	
 	
 		
-			wp_register_style('fontawesome', plugins_url('/woocommerce-ravikatre-plugin/scripts/bootstrap/dist/font-awesome/css/font-awesome.min.css'));
+			wp_register_style('fontawesome', plugins_url('/'.$this->plugin_name.'/scripts/bootstrap/dist/font-awesome/css/font-awesome.min.css'));
 		wp_enqueue_style('fontawesome');
 		//print_r($this->define);
 	}	
