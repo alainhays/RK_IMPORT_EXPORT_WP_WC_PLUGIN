@@ -92,19 +92,35 @@ if ( !class_exists( 'RK_ravi' ) ) {
 			
 		}
 
-		public function scripts() {
-			wp_register_script( 'scripts','https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', false, '1.0.0', false );
-			wp_enqueue_script( 'scripts' );
-			//print_r($this->define);
+		public function scripts_admin_head() {
+			wp_register_script( 'scripts_boot','//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', false, '1.0.0', false );
+			wp_enqueue_script( 'scripts_boot' );
+			wp_register_style( 'fontawesome','//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', null, '4.0.1' );
+			wp_enqueue_style( 'fontawesome' );
+			wp_register_style( 'custom_css',plugins_url('/'.$this->plugin_name.'/css/rk_style.css'), false, '1.0.0', 'all' );
+			wp_enqueue_style( 'custom_css' );
+			//$this->custom_post_css();
+			
+
+
+
 		}
 
-		public function scripts_init() {
-			wp_register_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', false, '1.0.0', 'all' );
+		public function scripts_admin_init() {
+			wp_register_style( 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', false, '1.0.0', 'all' );
 			wp_enqueue_style( 'bootstrap' );
-			wp_register_style( 'fontawesome','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' );
-			wp_enqueue_style( 'fontawesome' );
+			
 			//print_r($this->define);
 		}
+		
+	
+		function custom_post_css() {
+ 
+
+   
+		}
+		
+	
 
 		/**
 		 * Hook into actions and filters.
@@ -141,8 +157,9 @@ if ( !class_exists( 'RK_ravi' ) ) {
 			if ( $this->is_request( 'admin' ) ) {
 
 				include_once( 'admin/admin_init.php' );
-				add_action( 'admin_init', array( $this, 'scripts_init' ) );
-				add_action( 'admin_head', array( $this, 'scripts' ) );
+				
+				add_action( 'admin_init', array( $this, 'scripts_admin_init' ) );
+				add_action( 'admin_head', array( $this, 'scripts_admin_head' ) );
 			}
 
 			if ( $this->is_request( 'frontend' ) ) {
