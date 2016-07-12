@@ -35,6 +35,7 @@ class RK_Admin {
 			break;
 			default:
 				require_once 'html/'.$_REQUEST['page'].'.php';
+				$this->wc_api();
 			break;
 		}
 			
@@ -55,7 +56,7 @@ class RK_Admin {
 			$data = ['product'=>[
     'name' => 'Premium Quality',
 	'title' => 'my product name',
-	'sku'=>'P0002',
+	'sku'=>'P0004',
 	'status'=>'publish',
     'type' => 'simple',
     'regular_price' => '21.99',
@@ -81,7 +82,7 @@ class RK_Admin {
     ]
 ]];
 			
-			print_r($data);exit;
+			//print_r($data);exit;
 echo "done_start";
 //$list = $client->products->get();
 //print_r($list);
