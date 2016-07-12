@@ -20,11 +20,11 @@ class RK_Admin {
 	
 	function ravikatre_plugin_setup_menu(){
 		
-        add_menu_page( 'Test Plugin Page', 'Ravi Plugin', 'manage_options', 'rk-admin-dashboard',  array( $this, 'render_page_contents' ) );
-		add_submenu_page(  'rk-admin-dashboard', 'My Custom Page1', 'My Custom Page 1',
+        add_menu_page( 'RK wc import export', 'RK WC Import Export', 'manage_options', 'rk-admin-dashboard',  array( $this, 'render_page_contents' ) );
+		/*add_submenu_page(  'rk-admin-dashboard', 'My Custom Page1', 'My Custom Page 1',
     'manage_options', 'rk-submenu-ravikatre-plugin1', array( $this , 'render_page_contents' ));
 		add_submenu_page(  'rk-admin-dashboard', 'My Custom Page2', 'My Custom Page 2',
-    'manage_options', 'rk-submenu-ravikatre-plugin2', array( $this , 'render_page_contents' ));
+    'manage_options', 'rk-submenu-ravikatre-plugin2', array( $this , 'render_page_contents' ));*/
 		
 	}
 

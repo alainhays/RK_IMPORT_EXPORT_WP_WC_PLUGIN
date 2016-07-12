@@ -7,6 +7,34 @@ and open the template in the editor.
     Created on : 12 Jul, 2016, 1:00:45 PM
     Author     : Ravi
 */
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+#wpwrap *{
+    outline: none;
+    outline-offset:0px;
+    box-shadow:none;
+}
+
+
+
+
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+
+
+
+
+
+
+
 
   .divider {
   height: 10px;

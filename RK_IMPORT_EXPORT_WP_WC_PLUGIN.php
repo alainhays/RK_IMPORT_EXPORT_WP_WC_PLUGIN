@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: RK WooCommerce IMPORT EXPORT WP PLUGIN
+  Plugin Name: WooCommerce Import Export Plugin
   Plugin URI: http://wp.ravikatre.in/
   Version: 1.0.0
   Description: Plugin for WooCommerce customization.
@@ -93,8 +93,10 @@ if ( !class_exists( 'RK_ravi' ) ) {
 		}
 
 		public function scripts_admin_head() {
-			wp_register_script( 'scripts_boot','//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', false, '1.0.0', false );
+			wp_register_script( 'scripts_boot','//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', false );
 			wp_enqueue_script( 'scripts_boot' );
+			wp_register_script( 'custom_js',plugins_url('/'.$this->plugin_name.'/js/rk_js.js'),array( 'jquery' ));
+			wp_enqueue_script( 'custom_js' );
 			wp_register_style( 'fontawesome','//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', null, '4.0.1' );
 			wp_enqueue_style( 'fontawesome' );
 			wp_register_style( 'custom_css',plugins_url('/'.$this->plugin_name.'/css/rk_style.css'), false, '1.0.0', 'all' );
