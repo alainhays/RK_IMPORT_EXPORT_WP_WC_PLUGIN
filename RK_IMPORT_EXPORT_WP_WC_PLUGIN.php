@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: WooCommerce Ravikatre Plugin
+  Plugin Name: RK IMPORT EXPORT WP WC PLUGIN
   Plugin URI: http://wp.ravikatre.in/
   Version: 1.0.0
   Description: Plugin for WooCommerce customization.
