@@ -35,6 +35,7 @@ class RK_Admin {
 			break;
 			default:
 				require_once 'html/'.$_REQUEST['page'].'.php';
+				
 				//$this->wc_api();
 			break;
 		}
