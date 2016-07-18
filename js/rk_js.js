@@ -31,10 +31,14 @@ jQuery(document).ready(function($) {
 var exts = new Array('csv');
 			//console.log(get_ext);
 			if($.inArray(get_ext[1].toLowerCase(),exts)>-1){
+                                    $('.header_logo_url').attr("readonly","readonly"); 
 				   $('.header_logo_url').val(attachment.url);
-                 
-               $('.file_info').html(attachment.toSource()); 
+                                   var html_elements = "<input type='hidden' name='file_id' value='"+attachment.id+"'>";
+                                   
+                                   $('#import_frm').append( html_elements  );
+               //$('.file_info').html(attachment.toSource()); 
 			}else{
+                                 $('.header_logo_url').val('');
 				//alert('not allow');
 				alert('please select the csv file');
                                 return false
@@ -44,8 +48,8 @@ var exts = new Array('csv');
                
                
                
-              alert("jjjj");
-              alert(ajaxurl);  
+              //alert("jjjj");
+              //alert(ajaxurl);  
       //var selection = custom_uploader.state().get('selection');
     
       /*selection.map( function( attachment ) {

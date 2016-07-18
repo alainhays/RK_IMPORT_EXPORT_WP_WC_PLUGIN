@@ -12,7 +12,7 @@
   License: GNU General Public License v3.0
   License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
-
+error_reporting(1);
 if ( !defined( 'ABSPATH' ) )
 	exit; // Exit if accessed directly
 
