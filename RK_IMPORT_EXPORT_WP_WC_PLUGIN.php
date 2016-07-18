@@ -99,9 +99,7 @@ if ( !class_exists( 'RK_ravi' ) ) {
 			wp_enqueue_script( 'scripts_jquery_form' );
 			wp_register_script( 'custom_js',plugins_url('/'.$this->plugin_name.'/js/rk_js.js'),array( 'jquery' ));
 			wp_enqueue_script( 'custom_js' );
-			
-			
-	
+
 			
 			wp_register_style( 'fontawesome','//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', null, '4.0.1' );
 			wp_enqueue_style( 'fontawesome' );

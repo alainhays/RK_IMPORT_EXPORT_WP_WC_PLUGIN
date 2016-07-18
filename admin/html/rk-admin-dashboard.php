@@ -12,7 +12,7 @@ class RK_page_contents {
 	 * Constructor.
 	 */
 	public function __construct() {	
-		$action_method=($_REQUEST['action_method'])?$_REQUEST['action_method']:'output';
+		$action_method=(isset($_REQUEST['action_method']))?$_REQUEST['action_method']:'output';
 		$this->$action_method();
 	}
 	
@@ -79,12 +79,17 @@ class RK_page_contents {
     </div>
     <div id="collapseTwo" class="panel-collapse collapse">
       <div class="panel-body">
-      
-<?php	   
-//Nannie upload form
+      <div class="info file_info"></div>
+<?php
+//upload form
 $this->do_action_upload_form();
-	?>   
-	
+?>   
+
+		 
+			  
+			  
+		  
+		  
       </div>
     </div>
   </div>
@@ -137,12 +142,28 @@ if(function_exists( 'wp_enqueue_media' )){
 ?>
 
 				
-<input class="header_logo_url" type="text" name="header_logo" size="60" value="">
-<a href="#" class="rk_upload_file">Select</a>
 
-   
 
+  <!--i class="fa fa-file-excel-o fa-6"></i -->
+  <div class="container-fluid">
+	  <h3 class="h3"><label>SELECT FILE TO IMPORT</label></h3>
+	  <input class="header_logo_url input-lg" type="text" name="header_logo" size="60" value=""><br><br>
+<a href="#" class="rk_upload_file btn btn-info btn-lg" role="button">CHOOSE FILE</a>
+
+<a href="#" class="rk_import_btn btn btn-info btn-lg " role="button" style="background-color: #000000;">IMPORT</a>
+
+</div>
+
+
+
+<script type="text/javascript">
+var ajaxurl = "<?php  echo admin_url('admin-ajax.php')."?page=rk-admin-dashboard&rk_action=upload"; ?>";
+</script>
+     
 <?php
+
+
+
 }	
 	
 	
