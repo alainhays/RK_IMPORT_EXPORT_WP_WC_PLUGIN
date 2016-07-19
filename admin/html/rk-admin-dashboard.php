@@ -51,15 +51,8 @@ class RK_page_contents extends wcApi  {
                             foreach($fileData as $key=>$val){
                                
                                 $response =  $this->import_product($val);
-                                //print_r($response);exit;
-                               // if($response == 'success'){
                                 echo "<div class='alert alert-success' role='alert'>".$val['sku'].':'.$response->{'body'}."</div>";
-                                //}else{
-                                // echo "<div class='alert alert-danger' role='alert'><pre>{$response}</pre></div>";   
-                                //}
-  //flush();
-    //ob_flush();
-    //sleep(1);
+                                
                             }
                          }else {
                              die("error: records not found");
@@ -99,9 +92,11 @@ class RK_page_contents extends wcApi  {
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
+                                        <div class="container-fluid">
                                         <a href="https://docs.woothemes.com/document/woocommerce-rest-api/" target="_blank">How to Get WooCommerce REST API details?</a>
                                         <!-- contains goes here -->
                                         <?php $this->apiDetailsFrm();?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +140,20 @@ $this->do_action_upload_form();
                                 </div>
                                 <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        <h3>Coming....fy!</h3>
+ <div class="list-group">
+  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export"; ?>" class="list-group-item ">
+    <h4 class="list-group-item-heading">Export Products</h4>
+    <p class="list-group-item-text">-> In CSV formate click here</p>
+  </a>
+  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export"; ?>" class="list-group-item">
+    <h4 class="list-group-item-heading">Export Customers</h4>
+    <p class="list-group-item-text">-> In CSV formate click here</p>
+  </a>
+  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export"; ?>" class="list-group-item">
+    <h4 class="list-group-item-heading">Export Orders</h4>
+    <p class="list-group-item-text">-> In CSV formate click here</p>
+  </a>
+</div>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +187,7 @@ $this->do_action_upload_form();
             <!--i class="fa fa-file-excel-o fa-6"></i -->
             
                 <h3 class="h3"><label>SELECT FILE TO IMPORT</label></h3>
-                <input class="header_logo_url input-lg" type="text" name="header_logo" size="60" value="">
+                <input class="header_logo_url input-lg" type="text" name="header_logo" size="60" value=""><br><br>
                 <a href="#" class="rk_upload_file btn btn-info btn-lg" role="button">CHOOSE FILE</a>
 
                
@@ -238,6 +246,14 @@ $details = unserialize(get_option( $option_name ));
     }
     
     
+    
+    
+    function export(){
+        echo "hhjhhjj";
+        $result = $this->getProduct('products');
+        print_r($result);
+        exit;
+    }
 }
 new RK_page_contents();
 ?>

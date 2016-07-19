@@ -14,7 +14,10 @@ class wcApi {
                 $api_site_url = $apiDetails['api_site_url'];
 		$consumer_secret = $apiDetails['api_secrate'];
 		$options = array(
-			'ssl_verify'      => false,
+                    'ssl_verify'      => false,
+                    'timeout'         => 120,
+                    'debug'           => true,
+                    'return_as_array' => true
 		);
 
 		try {
@@ -94,10 +97,18 @@ class wcApi {
                 return  $e->get_response();
                
             }
-	} 
+	} //fun import_product
         
         
-        
-        
-        
+     function getProduct(){
+            try {
+            $response = $this->client->products->get();            
+            return $response;
+
+            }catch ( WC_API_Client_Exception $e ) {
+                return  $e->get_response();
+            }         
+     }// fun getProduct   
+      
+     
 }
