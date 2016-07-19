@@ -7,21 +7,25 @@ class wcApi {
     public function __construct() {
        
         require_once( '/../WooCommerce-REST-API-Client-Library-master/lib/woocommerce-api.php' );
-		$consumer_key = 'ck_88f2d7dc424150bffc6cd8dbf50bb6bc45275aea';
-		$consumer_secret = 'cs_68ff43ad77f9cab17df48739ccdff207afcc9e92';
+        $apiDetails = unserialize(get_option( 'rk_setting_values' ));
+		//$consumer_key = 'ck_88f2d7dc424150bffc6cd8dbf50bb6bc45275aea';
+		//$consumer_secret = 'cs_68ff43ad77f9cab17df48739ccdff207afcc9e92';
+                $consumer_key = $apiDetails['api_key'];
+                $api_site_url = $apiDetails['api_site_url'];
+		$consumer_secret = $apiDetails['api_secrate'];
 		$options = array(
 			'ssl_verify'      => false,
 		);
 
 		try {
 
-			$this->client = new WC_API_Client( 'http://wp.ravikatre.in', $consumer_key, $consumer_secret, $options );
+			$this->client = new WC_API_Client( $api_site_url, $consumer_key, $consumer_secret, $options );
 
 			
 		} catch ( WC_API_Client_Exception $e ) {
 
-			echo $e->getMessage() . PHP_EOL;
-			echo $e->getCode() . PHP_EOL;
+			//echo $e->getMessage() . PHP_EOL;
+			//echo $e->getCode() . PHP_EOL;
 
 			if ( $e instanceof WC_API_Client_HTTP_Exception ) {
 
@@ -72,13 +76,13 @@ class wcApi {
 //$list = $client->products->get();
 //print_r($list);
             try {
-            $response = $client->products->create($data);
+            $response = $client->products->create($data);            
             return $response;
 
             } catch ( WC_API_Client_Exception $e ) {
 
-                echo $e->getMessage() . PHP_EOL;
-                echo $e->getCode() . PHP_EOL;
+               // echo $e->getMessage() . PHP_EOL;
+               // echo $e->getCode() . PHP_EOL;
 
                 if ( $e instanceof WC_API_Client_HTTP_Exception ) {
 
@@ -87,7 +91,7 @@ class wcApi {
                     
                      
                 }
-                return  print_r( $e->get_response());
+                return  $e->get_response();
                
             }
 	} 

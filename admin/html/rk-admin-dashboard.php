@@ -51,14 +51,15 @@ class RK_page_contents extends wcApi  {
                             foreach($fileData as $key=>$val){
                                
                                 $response =  $this->import_product($val);
-                                if($response == 'success'){
-                                echo "<div class='alert alert-success' role='alert'><pre>{$response}</pre></div>";
-                                }else{
-                                 echo "<div class='alert alert-danger' role='alert'><pre>{$response}</pre></div>";   
-                                }
-  flush();
-    ob_flush();
-    sleep(1);
+                                //print_r($response);exit;
+                               // if($response == 'success'){
+                                echo "<div class='alert alert-success' role='alert'>".$val['sku'].':'.$response->{'body'}."</div>";
+                                //}else{
+                                // echo "<div class='alert alert-danger' role='alert'><pre>{$response}</pre></div>";   
+                                //}
+  //flush();
+    //ob_flush();
+    //sleep(1);
                             }
                          }else {
                              die("error: records not found");
@@ -92,13 +93,15 @@ class RK_page_contents extends wcApi  {
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                            Info
+                                           Settings
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
+                                        <a href="https://docs.woothemes.com/document/woocommerce-rest-api/" target="_blank">How to Get WooCommerce REST API details?</a>
                                         <!-- contains goes here -->
+                                        <?php $this->apiDetailsFrm();?>
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +119,7 @@ class RK_page_contents extends wcApi  {
 <div class="container-fluid">
 <form action="" name="import_frm" id="import_frm" method="post" enctype="multipart/form-data">
 <?php
+
 //upload form
 $this->do_action_upload_form();
 ?>   
@@ -193,7 +197,45 @@ $this->do_action_upload_form();
     
     
    
-    
+    function apiDetailsFrm(){
+        
+$option_name = 'rk_setting_values' ;
+$sav_details =  $_REQUEST['sav_details'];
+$data['api_site_url'] = $_REQUEST['api_site_url'];
+$data['api_key'] = $_REQUEST['api_key'];
+$data['api_secrate'] =  $_REQUEST['api_secrate'];
+
+$new_value = serialize($data);
+
+if ( !empty($sav_details ) ) {
+    if ( get_option( $option_name ) !== false ) {
+
+        // The option already exists, so we just update it.
+        update_option( $option_name, $new_value );
+
+    } else {
+
+        // The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+        $deprecated = null;
+        $autoload = 'no';
+        add_option( $option_name, $new_value, $deprecated, $autoload );
+    }
+}
+$details = unserialize(get_option( $option_name ));
+
+        ?>
+            <div>
+                <form action="" name="import_frm" method="post" enctype="multipart/form-data">
+                    <h4>Site Url:</h4> <input placeholder="http://www.ravikatre.in" class=" input-lg" type="text" name="api_site_url" size="60" value="<?php echo $details['api_site_url'] ?>">
+                <h4>Consumer Key:</h4> <input placeholder="Ex: ck_88f2d7dc424150bffc6cd8dbf50bb6bc45275aea" class=" input-lg" type="text" name="api_key" size="60" value="<?php echo $details['api_key'] ?>">
+                <h4>Consumer Secret:</h4> <input placeholder="Ex: cs_68ff43ad77f9cab17df48739ccdff207afcc9e92" class="input-lg" type="text" name="api_secrate" size="60" value="<?php echo $details['api_secrate'] ?>"><br><br>
+               
+
+                <input type='submit' class="rk_import_btn btn btn-info btn-lg " style="background-color: #000000;" value='Save' name="sav_details">
+                </form>
+            </div>    
+        <?php
+    }
     
     
 }
