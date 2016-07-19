@@ -1,4 +1,4 @@
-=== Plugin Name === 
+RK_IMPORT_EXPORT_WP_WC_PLUGIN 
 
 Contributors: RK_IMPORT_EXPORT_WP_WC_PLUGIN
 Donate link: http://ravikatre.in/
