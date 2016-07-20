@@ -12,6 +12,7 @@ class RK_page_contents extends wcApi  {
      */
     public function __construct() {
         parent::__construct();
+        $action_method='';
         $action_method = (isset($_REQUEST['action_method'])) ? $_REQUEST['action_method'] : 'output';
         $this->$action_method();
     }    
@@ -201,10 +202,11 @@ $this->do_action_upload_form();
     function apiDetailsFrm(){
         
 $option_name = 'rk_setting_values' ;
-$sav_details =  $_REQUEST['sav_details'];
-$data['api_site_url'] = $_REQUEST['api_site_url'];
-$data['api_key'] = $_REQUEST['api_key'];
-$data['api_secrate'] =  $_REQUEST['api_secrate'];
+
+$sav_details =  (isset($_REQUEST['sav_details']))?$_REQUEST['sav_details']:'';
+$data['api_site_url'] = (isset($_REQUEST['api_site_url']))?$_REQUEST['api_site_url']:'';
+$data['api_key'] = (isset($_REQUEST['api_key']))?$_REQUEST['api_key']:'';
+$data['api_secrate'] =  (isset($_REQUEST['api_secrate']))?$_REQUEST['api_secrate']:'';
 
 $new_value = serialize($data);
 

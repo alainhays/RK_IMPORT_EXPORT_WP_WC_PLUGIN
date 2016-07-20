@@ -16,6 +16,11 @@ error_reporting(1);
 if ( !defined( 'ABSPATH' ) )
 	exit; // Exit if accessed directly
 
+/**
+ * Check if WooCommerce is active
+ **/
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    // Put your plugin code here
 if ( !class_exists( 'RK_ravi' ) ) {
 
 	class RK_ravi {
@@ -197,3 +202,4 @@ if ( !class_exists( 'RK_ravi' ) ) {
 	RK_ravi::get_instance();
 }
 
+}
