@@ -100,9 +100,9 @@ class wcApi {
 	} //fun import_product
         
         
-     function getProduct(){
+     function getAllProduct(){
             try {
-            $response = $this->client->products->get();            
+            $response = $this->client->products->get('',array( 'filter[limit]' => -1 ));         
             return $response;
 
             }catch ( WC_API_Client_Exception $e ) {
@@ -111,4 +111,35 @@ class wcApi {
      }// fun getProduct   
       
      
+     
+     public function export_csv($headers,$data,$filename="rk_wc__products.csv") {
+        ob_get_clean();
+        header('Content-Type: text/csv');
+        header("Content-Disposition:attachment;filename={$filename}"); 
+        header('Expires: 0');  
+        header('Cache-Control: no-cache'); 
+         $output = fopen("php://output",'w') or die("Can't open php://output");
+         
+        fputcsv($output, $headers);
+        $imploadedata = '';
+        foreach($data as $key=>$product) {
+            $array_values = array();
+            $array_values = array_values($product);
+            foreach( $array_values as $v_key=>$v_val){
+                if(is_array($v_val)){
+                    $array_values[$v_key] = $this->formate_values($v_val);
+                }
+            }
+            fputcsv($output, $array_values );            
+        }
+         
+        $streamSize = ob_get_length(); 
+        fclose($output) or die("Can't close php://output");
+        header('Content-Length: '.$streamSize);
+        exit;
+     }
+     
+     function formate_values($data){       //print_r($data);       
+         return (implode("|", array_values($data)));
+     }
 }

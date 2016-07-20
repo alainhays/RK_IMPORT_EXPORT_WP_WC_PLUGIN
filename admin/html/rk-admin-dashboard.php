@@ -145,14 +145,7 @@ $this->do_action_upload_form();
     <h4 class="list-group-item-heading">Export Products</h4>
     <p class="list-group-item-text">-> In CSV formate click here</p>
   </a>
-  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export"; ?>" class="list-group-item">
-    <h4 class="list-group-item-heading">Export Customers</h4>
-    <p class="list-group-item-text">-> In CSV formate click here</p>
-  </a>
-  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export"; ?>" class="list-group-item">
-    <h4 class="list-group-item-heading">Export Orders</h4>
-    <p class="list-group-item-text">-> In CSV formate click here</p>
-  </a>
+  
 </div>
                                     </div>
                                 </div>
@@ -249,9 +242,13 @@ $details = unserialize(get_option( $option_name ));
     
     
     function export(){
-        echo "hhjhhjj";
-        $result = $this->getProduct('products');
-        print_r($result);
+        
+        $result = $this->getAllProduct();
+        
+        $headers = array_keys($result['products'][0]);
+        print_r($headers);
+        $this->export_csv($headers,$result['products']);
+        //print_r($result);
         exit;
     }
 }
