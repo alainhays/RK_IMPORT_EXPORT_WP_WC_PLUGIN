@@ -28,7 +28,7 @@ define("RK_PLUGIN_NAME",$plugin_name );
 		 * @var Singleton The reference the *Singleton* instance of this class
 		 */
 		private static $instance;
-		public $plugin_name = 'RK_IMPORT_EXPORT_WP_WC_PLUGIN';
+		
                 
 		/**
 		 * @var Reference to logging class.
@@ -101,13 +101,13 @@ define("RK_PLUGIN_NAME",$plugin_name );
 			wp_enqueue_script( 'scripts_boot' );
 			wp_register_script( 'scripts_jquery_form','//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js', false );
 			wp_enqueue_script( 'scripts_jquery_form' );
-			wp_register_script( 'custom_js',plugins_url('/'.$this->plugin_name.'/js/rk_js.js'),array( 'jquery' ));
+			wp_register_script( 'custom_js',plugins_url('/'.RK_PLUGIN_NAME.'/js/rk_js.js'),array( 'jquery' ));
 			wp_enqueue_script( 'custom_js' );
 
 			
 			wp_register_style( 'fontawesome','//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', null, '4.0.1' );
 			wp_enqueue_style( 'fontawesome' );
-			wp_register_style( 'custom_css',plugins_url('/'.$this->plugin_name.'/css/rk_style.css'), false, '1.0.0', 'all' );
+			wp_register_style( 'custom_css',plugins_url('/'.RK_PLUGIN_NAME.'/css/rk_style.css'), false, '1.0.0', 'all' );
 			wp_enqueue_style( 'custom_css' );
 			//$this->custom_post_css();
 			
