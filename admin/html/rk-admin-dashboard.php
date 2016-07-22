@@ -72,7 +72,7 @@ class RK_page_contents extends wcApi  {
         <div class="wrap rk_plugin">
             <div class="bs-example">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#sectionA"><h2>WooCommerce Import Export Plugin</h2></a></li>
+                    <li class="active"><a data-toggle="tab" href="#sectionA"><h2>WooCommerce Import Export </h2></a></li>
                     <!--li><a data-toggle="tab" href="#sectionB">Section B</a></li-->
 
                 </ul>
