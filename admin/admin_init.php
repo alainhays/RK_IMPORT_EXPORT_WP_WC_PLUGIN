@@ -29,7 +29,13 @@ class RK_Admin {
 	}
 
 	function render_page_contents(){
-			
+                    
+                    /**
+ * Check if WooCommerce is active
+ **/
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+
+				
 		switch($_REQUEST['page']){
 			case 'xyz';
 			break;
@@ -37,7 +43,10 @@ class RK_Admin {
 				require_once 'html/'.$_REQUEST['page'].'.php';
 			break;
 		}
-			
+                
+}else{
+    echo("<h2>Please install WooCommerce first.</h2>");
+}  			
 	}
 }
 return new RK_Admin();
