@@ -10,11 +10,14 @@ class RK_page_contents extends wcApi  {
     /**
      * Constructor.
      */
+    
     public function __construct() {
         parent::__construct();
         $action_method='';
         $action_method = (isset($_REQUEST['action_method'])) ? $_REQUEST['action_method'] : 'output';
         $this->$action_method();
+        
+       
     }    
     
     function csv_to_array($filename='', $delimiter=','){
@@ -113,6 +116,14 @@ class RK_page_contents extends wcApi  {
                                     <div class="panel-body">
                                         <div class="info file_info"></div>
 <div class="container-fluid">
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item"><h4>Download import csv sheet Samples</h4></li>
+            <li class="list-group-item"><a href="<?php  echo plugins_url('/'.RK_PLUGIN_NAME.'/files/wc_simple_products_csv_samples.csv'); ?>">Products</a></li>
+        </ul>      
+  
+        
+    </div>
 <form action="" name="import_frm" id="import_frm" method="post" enctype="multipart/form-data">
 <?php
 
@@ -142,7 +153,7 @@ $this->do_action_upload_form();
                                 <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
  <div class="list-group">
-  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export"; ?>" class="list-group-item ">
+  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export_products"; ?>" class="list-group-item ">
     <h4 class="list-group-item-heading">Export Products</h4>
     <p class="list-group-item-text">-> In CSV formate click here</p>
   </a>
@@ -243,13 +254,12 @@ $details = unserialize(get_option( $option_name ));
     
     
     
-    function export(){
+    function export_products(){
         
         $result = $this->getAllProduct();
         
-        $headers = array_keys($result['products'][0]);
-        print_r($headers);
-        $this->export_csv($headers,$result['products']);
+        $headers = array_keys($result['products'][0]);        
+        $this->export_csv($headers,$result['products'],'rk_wc_products.csv');
         //print_r($result);
         exit;
     }

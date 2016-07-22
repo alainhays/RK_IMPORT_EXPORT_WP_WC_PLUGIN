@@ -112,7 +112,7 @@ class wcApi {
       
      
      
-     public function export_csv($headers,$data,$filename="rk_wc__products.csv") {
+     public function export_csv($headers,$data,$filename="rk_wc_sample.csv") {
         ob_get_clean();
         header('Content-Type: text/csv');
         header("Content-Disposition:attachment;filename={$filename}"); 
@@ -139,7 +139,8 @@ class wcApi {
         exit;
      }
      
-     function formate_values($data){       //print_r($data);       
+     function formate_values($data){       //print_r($data);    
+         return '';
          return (implode("|", array_values($data)));
      }
 }

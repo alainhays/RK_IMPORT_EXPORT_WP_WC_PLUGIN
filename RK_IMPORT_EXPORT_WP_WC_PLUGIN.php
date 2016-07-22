@@ -20,6 +20,8 @@ if ( !defined( 'ABSPATH' ) )
     // Put your plugin code here
 if ( !class_exists( 'RK_ravi' ) ) {
 
+$plugin_name = 'RK_IMPORT_EXPORT_WP_WC_PLUGIN';
+define("RK_PLUGIN_NAME",$plugin_name );
 	class RK_ravi {
 
 		/**
@@ -27,7 +29,7 @@ if ( !class_exists( 'RK_ravi' ) ) {
 		 */
 		private static $instance;
 		public $plugin_name = 'RK_IMPORT_EXPORT_WP_WC_PLUGIN';
-
+                
 		/**
 		 * @var Reference to logging class.
 		 */
