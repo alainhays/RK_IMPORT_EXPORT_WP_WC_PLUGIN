@@ -17,27 +17,36 @@ print_r($cartItemSessionData);
 
 
 function pippin_filter_content_sample($content) {
-    
+
     ?>
 
 
-    <div class="page-header">
-  <h1>Share Dialog</h1>
-</div>
 
-<p>Click the button below to trigger a Share Dialog</p>
 
-<div id="shareBtn" class="btn btn-success clearfix">Share</div>
-
-<p style="margin-top: 50px">
-  <hr />
-  <a class="btn btn-small"  href="https://developers.facebook.com/docs/sharing/reference/share-dialog">Share Dialog Documentation</a>
-</p>
+<button id="shareBtn" class=" shareBtn btn btn-success clearfix">Share</button>
+<div id="fb-root"></div>
 
 
 
-         <div id="fb-root"></div>
-<script>
+
+
+  
+        
+        
+        
+        <?php
+    
+    
+	
+	return $content;
+    
+}
+add_action('the_content', 'pippin_filter_content_sample');
+add_action('wp_footer', 'fb_js_insertion');
+function fb_js_insertion(){
+    
+    ?>
+ <script>
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '1428712257377698',
@@ -68,29 +77,19 @@ jQuery(window).load(function() {
     
     
     
-   document.getElementById('shareBtn').onclick = function() {
+jQuery(".shareBtn").click (function() {
   FB.ui({
     method: 'share',
     display: 'popup',
-    href: 'https://developers.facebook.com/docs/',
+    href: window.location.href,
   }, function(response){});
-} 
-    
 });
-</script> 
 
-
-
-
-  
+});
+</script>        
+        
         
         
         
         <?php
-    
-    
-	$new_content = '<p><button>Ravi katreeeThis is added to the bottom of all post and page content</p>';
-	$content = $content . $new_content;
-	return $content;
 }
-add_filter('the_content', 'pippin_filter_content_sample');
