@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 /**
  * WC_Admin class.
  */
-require_once '/../../includes/wcApi.php';
+require_once RK_PLUGIN_ROOT_DIR.'includes/wcApi.php';
 class RK_page_contents extends wcApi  {
     /**
      * Constructor.
@@ -256,7 +256,7 @@ $details = unserialize(get_option( $option_name ));
     
     function export_products(){
         
-        $result = $this->getAllProduct();
+        $result =  (array) $this->getAllProduct();
         
         $headers = array_keys($result['products'][0]);        
         $this->export_csv($headers,$result['products'],'rk_wc_products.csv');

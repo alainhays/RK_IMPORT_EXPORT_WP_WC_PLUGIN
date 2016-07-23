@@ -22,6 +22,9 @@ if ( !class_exists( 'RK_ravi' ) ) {
 
 $plugin_name = 'RK_IMPORT_EXPORT_WP_WC_PLUGIN';
 define("RK_PLUGIN_NAME",$plugin_name );
+define('RK_PLUGIN_ROOT_DIR', dirname(__FILE__) . '/');
+
+
 	class RK_ravi {
 
 		/**

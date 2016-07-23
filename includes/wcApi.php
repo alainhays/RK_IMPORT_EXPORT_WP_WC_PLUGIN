@@ -6,7 +6,7 @@ class wcApi {
     public $client;
     public function __construct() {
        
-        require_once( '/../WooCommerce-REST-API-Client-Library-master/lib/woocommerce-api.php' );
+        require_once( RK_PLUGIN_ROOT_DIR.'WooCommerce-REST-API-Client-Library-master/lib/woocommerce-api.php' );
         $apiDetails = unserialize(get_option( 'rk_setting_values' ));
 		//$consumer_key = 'ck_88f2d7dc424150bffc6cd8dbf50bb6bc45275aea';
 		//$consumer_secret = 'cs_68ff43ad77f9cab17df48739ccdff207afcc9e92';
