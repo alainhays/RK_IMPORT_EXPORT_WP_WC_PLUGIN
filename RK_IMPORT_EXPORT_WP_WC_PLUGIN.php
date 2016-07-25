@@ -6,6 +6,7 @@
   Description: Plugin for WooCommerce customization.
   Author: Ravi
   Author URI: http://www.ravikatre.in/
+ download_url: https://github.com/ravi2katre/RK_IMPORT_EXPORT_WP_WC_PLUGIN/archive/master.zip,
   Text Domain: RK
   Domain Path: /languages/
 
