@@ -43,7 +43,8 @@ class RK_page_contents extends wcApi  {
     
         
     
-       public function import_csv_data() {
+       public function import_csv_data($import_type='products') {
+           $import_type = (empty($_REQUEST['import_type']))?$import_type:$_REQUEST['import_type']; 
         header( 'Content-type: text/html; charset=utf-8' );
            $fullsize_path =   get_attached_file( $_REQUEST['file_id'] );
            
@@ -54,8 +55,11 @@ class RK_page_contents extends wcApi  {
                          if ($noOfLines > 0) {
                             foreach($fileData as $key=>$val){
                                
-                                $response =  $this->import_product($val);
+                                
+                                $response =  $this->importItems($val,$import_type);
                                 echo "<div class='alert alert-success' role='alert'>".$val['sku'].':'.$response->{'body'}."</div>";
+                                
+                                
                                 
                             }
                          }else {
@@ -120,6 +124,9 @@ class RK_page_contents extends wcApi  {
         <ul class="list-group">
             <li class="list-group-item"><h4>Download import csv sheet Samples</h4></li>
             <li class="list-group-item"><a href="<?php  echo plugins_url('/'.RK_PLUGIN_NAME.'/files/wc_simple_products_csv_samples.csv'); ?>">Products</a></li>
+            <li class="list-group-item"><a href="<?php  echo plugins_url('/'.RK_PLUGIN_NAME.'/files/rk_wc_orders.csv'); ?>">Orders</a></li>
+             <li class="list-group-item"><a href="<?php  echo plugins_url('/'.RK_PLUGIN_NAME.'/files/rk_wc_customers.csv'); ?>">Customers</a></li>           
+           
         </ul>      
   
         
@@ -153,11 +160,35 @@ $this->do_action_upload_form();
                                 <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
  <div class="list-group">
-  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export_products"; ?>" class="list-group-item ">
+  <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export&export_type=products"; ?>" class="list-group-item ">
     <h4 class="list-group-item-heading">Export Products</h4>
     <p class="list-group-item-text">-> In CSV formate click here</p>
   </a>
   
+     
+     
+    <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export&export_type=orders"; ?>" class="list-group-item ">
+    <h4 class="list-group-item-heading">Export Orders</h4>
+    <p class="list-group-item-text">-> In CSV formate click here</p>
+  </a>   
+     
+  
+  
+          <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export&export_type=reports"; ?>" class="list-group-item ">
+    <h4 class="list-group-item-heading">Export Reports</h4>
+    <p class="list-group-item-text">-> In CSV formate click here</p>
+  </a>  
+     
+          <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export&export_type=customers"; ?>" class="list-group-item ">
+    <h4 class="list-group-item-heading">Export Customers</h4>
+    <p class="list-group-item-text">-> In CSV formate click here</p>
+  </a> 
+     
+   <a href="<?php echo admin_url('admin.php') . "?page=rk-admin-dashboard&action_method=export&export_type=coupons"; ?>" class="list-group-item ">
+    <h4 class="list-group-item-heading">Export Coupons</h4>
+    <p class="list-group-item-text">-> In CSV formate click here</p>
+  </a>
+              
 </div>
                                     </div>
                                 </div>
@@ -192,7 +223,17 @@ $this->do_action_upload_form();
             <!--i class="fa fa-file-excel-o fa-6"></i -->
             
                 <h3 class="h3"><label>SELECT FILE TO IMPORT</label></h3>
-                <input class="header_logo_url input-lg" type="text" name="header_logo" size="60" value=""><br><br>
+                <input class="header_logo_url input-lg" type="text" name="header_logo" size="60" value="">
+                <select name="import_type" class="selectpicker input-lg" data-live-search="true">
+                    <option data-tokens="products" value="products">Products</option>
+  <option data-tokens="orders" value="orders">Orders</option>
+  <option data-tokens="customers" value="customers">Customers</option>
+  
+
+</select>
+              
+                
+                <br><br>
                 <a href="#" class="rk_upload_file btn btn-info btn-lg" role="button">CHOOSE FILE</a>
 
                
@@ -251,18 +292,20 @@ $details = unserialize(get_option( $option_name ));
         <?php
     }
     
+  
     
-    
-    
-    function export_products(){
+    function export($export_type='products'){
         
-        $result =  (array) $this->getAllProduct();
+        $export_type = (empty($_REQUEST['export_type']))?$export_type:$_REQUEST['export_type'];
         
-        $headers = array_keys($result['products'][0]);        
-        $this->export_csv($headers,$result['products'],'rk_wc_products.csv');
+        $result =  (array) $this->getItems($export_type);
+        
+        $headers = array_keys($result[$export_type][0]);        
+        $this->export_csv($headers,$result[$export_type],'rk_wc_'.$export_type.'.csv');
         //print_r($result);
         exit;
     }
+    
 }
 new RK_page_contents();
 ?>
