@@ -39,30 +39,7 @@ class wcApi {
     }
     
     
-    function import_product($data){
-		
-            $client = $this->client;                   
-         
-            try {
-            $response = $client->products->create($data);            
-            return $response;
-
-            } catch ( WC_API_Client_Exception $e ) {
-
-               // echo $e->getMessage() . PHP_EOL;
-               // echo $e->getCode() . PHP_EOL;
-
-                if ( $e instanceof WC_API_Client_HTTP_Exception ) {
-
-                       // print_r( $e->get_request() );
-                        //print_r( $e->get_response() );
-                    
-                     
-                }
-                return  $e->get_response();
-               
-            }
-	} //fun import_product
+   
         
  
         
@@ -95,7 +72,8 @@ class wcApi {
             }       
      }// fun getProduct   
       
-      function getProductItems($items='products'){
+      function getItems($items='products'){
+          
             try {
             $response = $this->client->$items->get('',array( 'filter[limit]' => -1 ));         
             return $response;

@@ -53,15 +53,21 @@ class RK_page_contents extends wcApi  {
                          $noOfLines = count($fileData);        
 
                          if ($noOfLines > 0) {
+                             $html='';
                             foreach($fileData as $key=>$val){
                                
                                 
                                 $response =  $this->importItems($val,$import_type);
-                                echo "<div class='alert alert-success' role='alert'>".$val['sku'].':'.$response->{'body'}."</div>";
+                                
+                              
+                                
+                                $html .=  "<div class='alert alert-success' role='alert'>".$val['sku'].':'.$response->{'body'}."</div>";
                                 
                                 
                                 
                             }
+                            
+                             $this->getHtml($html );
                          }else {
                              die("error: records not found");
                          }
@@ -295,15 +301,44 @@ $details = unserialize(get_option( $option_name ));
   
     
     function export($export_type='products'){
-        
+       
         $export_type = (empty($_REQUEST['export_type']))?$export_type:$_REQUEST['export_type'];
-        
+       
         $result =  (array) $this->getItems($export_type);
         
         $headers = array_keys($result[$export_type][0]);        
         $this->export_csv($headers,$result[$export_type],'rk_wc_'.$export_type.'.csv');
+       
         //print_r($result);
         exit;
+    }
+    
+    
+    function getHtml($contents){
+        
+        ?>
+            <div class="wrap rk_plugin">
+            <div class="bs-example">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#sectionA"><h2>WooCommerce Import Export </h2></a></li>
+                    <!--li><a data-toggle="tab" href="#sectionB">Section B</a></li-->
+
+                </ul>
+                 <div class="tab-content">
+
+                    <div id="sectionA" class="tab-pane fade in active">
+
+
+                        <div class="divider"></div>
+                        <input action="action" type="button" class="btn btn-success btn-lg" value="Back" onclick="history.go(-1);" >
+                         <div class="divider"></div>
+                <?php echo $contents; ?>
+                        </div>
+                     </div>
+                </div>
+                 </div>
+            </div>
+            <?php
     }
     
 }
